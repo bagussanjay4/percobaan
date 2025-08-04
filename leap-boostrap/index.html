@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -87,26 +86,13 @@
         left: 0;
       }
 
-      .sidebar {
-        width: 200px;
-        height: 100vh;
-        background: #ccc;
-        padding: 10px;
-        transition: all 0.3s ease;
-      }
-
-      .sidebar.hidden {
-        transform: translateX(-100%);
-      }
-
-
       .overlay {
         position: fixed;
         top: 0;
         left: 0;
         height: 100%;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0,0,0,0.5);
         z-index: 1049;
         display: none;
       }
@@ -117,121 +103,112 @@
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Tombol Hamburger -->
-  <button class="btn btn-outline-primary d-md-none m-3" id="toggleSidebar">
-    <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </button>
-
-  <!-- Overlay -->
-  <div class="overlay" id="sidebarOverlay"></div>
-
-  <div class="container-fluid">
-    <div class="row">
-
-      <!-- Sidebar -->
-      <div id="sidebar" class="col-md-3 col-lg-2 sidebar p-4 d-flex flex-column">
-        <div class="text-center mb-4">
-          <img src="leap-boostrap/Asset LEAP/Lipy/02 Lipy/LIPPY-02.png" alt="Logo LEAP" class="img-fluid mb-2"
-            width="100">
-          <button onclick="toggleSidebar()">Toggle Sidebar</button>
-          
-
-          <div id="sidebar" class="sidebar">
-            Ini Sidebar
-          </div>
-
-          <h5>LEAP</h5>
-        </div>
-
-        <nav class="nav flex-column mb-auto">
-          <a class="nav-link" href="#"><i class="bi bi-house-door-fill me-2"></i>Home</a>
-          <a class="nav-link" href="#"><i class="bi bi-person-circle me-2"></i>Profil</a>
-        </nav>
-
-        <div class="mt-auto text-center logout">
-          <img src="MaskotLeap/GUMMY MEMBACA BUKU.png" alt="Maskot" class="mb-2">
-          <br>
-          <button class="btn btn-danger btn-sm mt-1" id="logoutBtn">Log Out</button>
-        </div>
-      </div>
-
-      <!-- Main Content -->
-      <div class="col-md-9 col-lg-10 p-5">
-        <div class="row g-4">
-
-          <!-- Buku -->
-          <div class="col-md-8">
-            <div class="card shadow-sm p-3 d-flex flex-row align-items-start">
-              <img src="assets/keriting-lurus.jpg" alt="Cover Buku" class="book-cover me-4">
-              <div>
-                <h5 class="text-primary">Keriting atau Lurus</h5>
-                <p class="mb-2">Bentuk rambut tidak penting, yang penting kita percaya diri dan gembira!</p>
-                <button class="btn btn-primary" id="bacabuku">📖 Baca Buku</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bookmark -->
-          <div class="col-md-4">
-            <div class="bookmark-box shadow-sm">
-              <h6 class="text-primary">Bookmark</h6>
-              <p class="text-muted fst-italic mt-3">Silakan tambahkan bookmark dahulu</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
+<!-- Tombol Hamburger -->
+<button class="btn btn-outline-primary d-md-none m-3" id="toggleSidebar">
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
+</button>
 
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Overlay -->
+<div class="overlay" id="sidebarOverlay"></div>
 
-  <!-- Custom Script -->
-  <script>
-    const toggleBtn = document.getElementById('toggleSidebar');
-    const hamburger = document.getElementById('hamburger');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    const logoutBtn = document.getElementById('logoutBtn');
+<div class="container-fluid">
+  <div class="row">
 
-    // Toggle sidebar
-    toggleBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-      overlay.classList.toggle('show');
-      hamburger.classList.toggle('active');
-    });
+    <!-- Sidebar -->
+    <div id="sidebar" class="col-md-3 col-lg-2 sidebar p-4 d-flex flex-column">
+      <div class="text-center mb-4">
+        <img src="leap-boostrap/Asset LEAP/Lipy/02 Lipy/LIPPY-02.png" alt="Logo LEAP" class="img-fluid mb-2" width="100">
+        
+        <h5>LEAP</h5>
+      </div>
 
-    // Close sidebar when clicking overlay
-    overlay.addEventListener('click', () => {
-      sidebar.classList.remove('active');
-      overlay.classList.remove('show');
-      hamburger.classList.remove('active');
-    });
+      <nav class="nav flex-column mb-auto">
+        <a class="nav-link" href="#"><i class="bi bi-house-door-fill me-2"></i>Home</a>
+        <a class="nav-link" href="#"><i class="bi bi-person-circle me-2"></i>Profil</a>
+      </nav>
 
-    // Logout button functionality - redirect ke login.html
-    logoutBtn.addEventListener('click', () => {
-      sessionStorage.clear();
-      localStorage.clear();
-      window.location.href = 'login.html';
-    });
+      <div class="mt-auto text-center logout">
+        <img src="MaskotLeap/GUMMY MEMBACA BUKU.png" alt="Maskot" class="mb-2">
+        <br>
+        <button class="btn btn-danger btn-sm mt-1" id="logoutBtn">Log Out</button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9 col-lg-10 p-5">
+      <div class="row g-4">
+
+        <!-- Buku -->
+        <div class="col-md-8">
+          <div class="card shadow-sm p-3 d-flex flex-row align-items-start">
+            <img src="assets/keriting-lurus.jpg" alt="Cover Buku" class="book-cover me-4">
+            <div>
+              <h5 class="text-primary">Keriting atau Lurus</h5>
+              <p class="mb-2">Bentuk rambut tidak penting, yang penting kita percaya diri dan gembira!</p>
+              <button class="btn btn-primary" id="bacabuku">📖 Baca Buku</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bookmark -->
+        <div class="col-md-4">
+          <div class="bookmark-box shadow-sm">
+            <h6 class="text-primary">Bookmark</h6>
+            <p class="text-muted fst-italic mt-3">Silakan tambahkan bookmark dahulu</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom Script -->
+<script>
+  const toggleBtn = document.getElementById('toggleSidebar');
+  const hamburger = document.getElementById('hamburger');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const logoutBtn = document.getElementById('logoutBtn');
+
+  // Toggle sidebar
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('show');
+    hamburger.classList.toggle('active');
+  });
+
+  // Close sidebar when clicking overlay
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('show');
+    hamburger.classList.remove('active');
+  });
+
+  // Logout button functionality - redirect ke login.html
+  logoutBtn.addEventListener('click', () => {
+    sessionStorage.clear();
+    localStorage.clear();
+    window.location.href = 'login.html';
+  });
 
 
-    bacabuku.addEventListener('click', () => {
-      sessionStorage.clear();
-      localStorage.clear();
-      window.location.href = 'baca.html';
-    });
-  </script>
+  bacabuku.addEventListener('click', () => {
+    sessionStorage.clear();
+    localStorage.clear();
+    window.location.href = 'baca.html';
+  });
+</script>
 
 </body>
-
 </html>
