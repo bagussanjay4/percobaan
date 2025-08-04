@@ -41,7 +41,6 @@
       border-radius: 12px;
     }
 
-    /* Hamburger icon styling */
     .hamburger {
       display: flex;
       flex-direction: column;
@@ -72,7 +71,6 @@
       transform: translateY(-9px) rotate(-45deg);
     }
 
-    /* Responsif Sidebar untuk layar kecil */
     @media (max-width: 768px) {
       #sidebar {
         position: fixed;
@@ -107,7 +105,7 @@
 </head>
 <body>
 
-<!-- Tombol Hamburger (Hanya tampil di layar kecil) -->
+<!-- Tombol Hamburger -->
 <button class="btn btn-outline-primary d-md-none m-3" id="toggleSidebar">
   <div class="hamburger" id="hamburger">
     <span></span>
@@ -116,12 +114,12 @@
   </div>
 </button>
 
-<!-- Overlay (untuk klik di luar sidebar) -->
+<!-- Overlay -->
 <div class="overlay" id="sidebarOverlay"></div>
 
 <div class="container-fluid">
   <div class="row">
-    
+
     <!-- Sidebar -->
     <div id="sidebar" class="col-md-3 col-lg-2 sidebar p-4 d-flex flex-column">
       <div class="text-center mb-4">
@@ -196,15 +194,11 @@
     hamburger.classList.remove('active');
   });
 
-  // Logout button functionality
+  // Logout button functionality - redirect ke login.html
   logoutBtn.addEventListener('click', () => {
-    // Here you would typically add your logout logic
-    // For example, clearing session storage or sending a logout request
-    console.log('Logout clicked');
-    // alert('Logout functionality would go here');
-    
-    // If you want to prevent the default form submission behavior
-    // event.preventDefault();
+    sessionStorage.clear();
+    localStorage.clear();
+    window.location.href = 'login.html';
   });
 </script>
 
