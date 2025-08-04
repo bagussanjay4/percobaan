@@ -150,7 +150,7 @@
             <div>
               <h5 class="text-primary">Keriting atau Lurus</h5>
               <p class="mb-2">Bentuk rambut tidak penting, yang penting kita percaya diri dan gembira!</p>
-              <button class="btn btn-primary">📖 Baca Buku</button>
+              <button class="btn btn-primary" id="bacabuku">📖 Baca Buku</button>
             </div>
           </div>
         </div>
@@ -199,6 +199,13 @@
     sessionStorage.clear();
     localStorage.clear();
     window.location.href = 'login.html';
+  });
+
+
+  bacabuku.addEventListener('click', () => {
+    sessionStorage.clear();
+    localStorage.clear();
+    window.location.href = 'baca.html';
   });
 </script>
 
