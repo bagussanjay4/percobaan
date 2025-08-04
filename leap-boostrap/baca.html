@@ -10,43 +10,90 @@
     body {
       background-color: #c9eeff;
       font-family: 'Segoe UI', sans-serif;
+      margin: 0;
     }
-    .reader-container {
-      background-color: #e3f2fd;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+
     .reader-toolbar {
       background-color: #0d47a1;
       color: white;
       padding: 0.75rem 1rem;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .reader-toolbar .left-controls,
-    .reader-toolbar .right-controls {
+
+    .left-controls {
       display: flex;
       align-items: center;
     }
-    .reader-toolbar i {
-      font-size: 1.25rem;
-      margin-right: 1rem;
-      cursor: pointer;
-      color: white;
-    }
+
     .reader-toolbar .logo {
       height: 30px;
       margin-left: 1rem;
     }
-    .book-pages-wrapper {
+
+    .center-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .center-controls i {
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .btn-nav {
+      background-color: transparent;
+      border: 1px solid white;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
       display: flex;
       justify-content: center;
-      margin: 2rem 0;
-      transition: transform 0.3s ease;
-      transform-origin: top center;
+      align-items: center;
+      font-size: 1.1rem;
+      transition: background-color 0.2s ease;
     }
+
+    .btn-nav:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .page-number {
+      font-size: 0.95rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: transparent;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      border: 1px solid white;
+    }
+
+    .reader-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 1rem;
+    }
+
+    .book-pages-container {
+      display: flex;
+      justify-content: center;
+      transition: transform 0.3s ease;
+      transform-origin: center center;
+      margin-bottom: 2rem;
+    }
+
     .book-pages {
       background-color: #ffffff;
       padding: 2rem;
@@ -58,6 +105,7 @@
       justify-content: space-between;
       gap: 2rem;
     }
+
     .book-page {
       flex: 1;
       background-color: #fefefe;
@@ -67,59 +115,46 @@
       text-align: justify;
       font-size: 1.2rem;
     }
-    .page-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .page-controls button {
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
+
+  <!-- Toolbar -->
+  <div class="reader-toolbar">
+    <!-- Kiri -->
+    <div class="left-controls">
+      <a href="index.html" class="text-white text-decoration-none">
+        <i class="bi bi-arrow-left-short" title="Kembali ke Dashboard"></i>
+      </a>
+      <img src="assets/logo-leap.png" alt="LEAP Logo" class="logo">
+    </div>
+
+    <!-- Tengah (Semua Kontrol) -->
+    <div class="center-controls">
+      <i class="bi bi-house" title="Beranda"></i>
+      <i class="bi bi-zoom-in" id="zoomInBtn" title="Perbesar"></i>
+      <i class="bi bi-zoom-out" id="zoomOutBtn" title="Perkecil"></i>
+      <i class="bi bi-list-ul" title="Daftar Isi"></i>
+
+      <!-- Navigasi Halaman -->
+      <button id="prevBtn" class="btn-nav" title="Sebelumnya"><i class="bi bi-chevron-left"></i></button>
+      <div id="pageNumber" class="page-number" title="Halaman Aktif">1</div>
+      <button id="nextBtn" class="btn-nav" title="Berikutnya"><i class="bi bi-chevron-right"></i></button>
+
+      <i class="bi bi-arrows-fullscreen" title="Layar Penuh"></i>
+    </div>
+
+    <!-- Kosongkan kanan -->
+    <div></div>
+  </div>
+
+  <!-- Konten Buku -->
   <div class="reader-container">
-    <!-- Toolbar -->
-    <div class="reader-toolbar">
-      <div class="left-controls">
-        <a href="index.html" class="text-white text-decoration-none"><i class="bi bi-arrow-left-short" title="Kembali ke Dashboard"></i></a>
-        <img src="assets/logo-leap.png" alt="LEAP Logo" class="logo">
-      </div>
-      <div class="right-controls">
-        <i class="bi bi-house" title="Beranda"></i>
-        <i class="bi bi-arrow-left" title="Sebelumnya"></i>
-        <i class="bi bi-arrow-right" title="Berikutnya"></i>
-        <i class="bi bi-zoom-in" id="zoomInBtn" title="Perbesar"></i>
-        <i class="bi bi-zoom-out" id="zoomOutBtn" title="Perkecil"></i>
-        <i class="bi bi-list-ul" title="Daftar Isi"></i>
-        <i class="bi bi-arrows-fullscreen" title="Layar Penuh"></i>
-        <i class="bi bi-volume-up" title="Audio"></i>
-        <i class="bi bi-gear" title="Pengaturan"></i>
-      </div>
-    </div>
-
-    <!-- Buku -->
-    <div class="book-pages-wrapper" id="zoomContainer">
+    <div class="book-pages-container" id="zoomContainer">
       <div class="book-pages">
-        <div class="book-page">
-          <p>Ricky dan Fira senang dengan rambut mereka. Ricky suka rambutnya yang keriting.</p>
-        </div>
-        <div class="book-page">
-          <p>Bentuk rambut tidak penting, yang penting kita percaya diri dan gembira!</p>
-        </div>
+        <div class="book-page" id="leftPage"></div>
+        <div class="book-page" id="rightPage"></div>
       </div>
-    </div>
-
-    <!-- Navigasi Halaman -->
-    <div class="page-controls">
-      <button class="btn btn-outline-primary"><i class="bi bi-arrow-left"></i></button>
-      <span class="badge bg-primary px-3 py-2">2</span>
-      <button class="btn btn-outline-primary"><i class="bi bi-arrow-right"></i></button>
     </div>
   </div>
 
@@ -128,11 +163,11 @@
     const zoomInBtn = document.getElementById('zoomInBtn');
     const zoomOutBtn = document.getElementById('zoomOutBtn');
     const zoomContainer = document.getElementById('zoomContainer');
+    const pageNumber = document.getElementById('pageNumber');
 
-    let currentZoom = 1; // default scale
-
+    let currentZoom = 1;
     zoomInBtn.addEventListener('click', () => {
-      if (currentZoom < 2.0) {
+      if (currentZoom < 2.5) {
         currentZoom += 0.1;
         zoomContainer.style.transform = `scale(${currentZoom})`;
       }
@@ -144,6 +179,50 @@
         zoomContainer.style.transform = `scale(${currentZoom})`;
       }
     });
+
+    const pagesData = [
+      [
+        "Ricky dan Fira senang dengan rambut mereka. Ricky suka rambutnya yang keriting.",
+        "Bentuk rambut tidak penting, yang penting kita percaya diri dan gembira!"
+      ],
+      [
+        "Fira memiliki rambut lurus panjang. Ia bangga dengan rambutnya yang bersinar.",
+        "Rambut yang sehat berasal dari kebiasaan baik, seperti makan bergizi dan rajin mencuci rambut."
+      ],
+      [
+        "Di sekolah, teman-teman mereka juga memiliki rambut berbeda-beda.",
+        "Perbedaan bukanlah masalah, justru membuat dunia lebih berwarna!"
+      ]
+    ];
+
+    let currentPage = 0;
+    const leftPage = document.getElementById('leftPage');
+    const rightPage = document.getElementById('rightPage');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateBookContent() {
+      const [left, right] = pagesData[currentPage];
+      leftPage.innerText = left;
+      rightPage.innerText = right;
+      pageNumber.innerText = currentPage + 1;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        updateBookContent();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < pagesData.length - 1) {
+        currentPage++;
+        updateBookContent();
+      }
+    });
+
+    updateBookContent();
   </script>
 </body>
 </html>
