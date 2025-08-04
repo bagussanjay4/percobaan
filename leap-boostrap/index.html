@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LEAP Dashboard Siswa</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f1f6ff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .sidebar {
+      background-color: #0d47a1;
+      color: white;
+      min-height: 100vh;
+    }
+    .sidebar .nav-link {
+      color: white;
+    }
+    .sidebar .nav-link:hover {
+      background-color: #1565c0;
+    }
+    .logout img {
+      width: 60px;
+    }
+    .book-cover {
+      width: 120px;
+      border-radius: 10px;
+    }
+    .bookmark-box {
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    
+    <!-- Sidebar -->
+    <div class="col-md-3 col-lg-2 sidebar p-4 d-flex flex-column">
+      <div class="text-center mb-4">
+        <img src="assets/logo-leap.png" alt="Logo LEAP" class="img-fluid mb-2" width="100">
+        <h5>LEAP</h5>
+      </div>
+
+      <nav class="nav flex-column mb-auto">
+        <a class="nav-link" href="#"><i class="bi bi-house-door-fill me-2"></i>Home</a>
+        <a class="nav-link" href="#"><i class="bi bi-person-circle me-2"></i>Profil</a>
+      </nav>
+
+      <div class="mt-auto text-center logout">
+        <img src="assets/maskot.png" alt="Maskot" class="mb-2">
+        <br>
+        <button class="btn btn-danger btn-sm mt-1">Log Out</button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9 col-lg-10 p-5">
+      <div class="row g-4">
+
+        <!-- Buku -->
+        <div class="col-md-8">
+          <div class="card shadow-sm p-3 d-flex flex-row align-items-start">
+            <img src="assets/keriting-lurus.jpg" alt="Cover Buku" class="book-cover me-4">
+            <div>
+              <h5 class="text-primary">Keriting atau Lurus</h5>
+              <p class="mb-2">Bentuk rambut tidak penting, yang penting kita percaya diri dan gembira!</p>
+              <button class="btn btn-primary">📖 Baca Buku</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bookmark -->
+        <div class="col-md-4">
+          <div class="bookmark-box shadow-sm">
+            <h6 class="text-primary">Bookmark</h6>
+            <p class="text-muted fst-italic mt-3">Silakan tambahkan bookmark dahulu</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Bootstrap JS Icon CDN (for icons) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
