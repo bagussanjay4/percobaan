@@ -25,11 +25,20 @@
       justify-content: space-between;
       align-items: center;
     }
-    .reader-toolbar .left-controls i,
-    .reader-toolbar .right-controls i {
+    .reader-toolbar .left-controls,
+    .reader-toolbar .right-controls {
+      display: flex;
+      align-items: center;
+    }
+    .reader-toolbar i {
       font-size: 1.25rem;
       margin-right: 1rem;
       cursor: pointer;
+      color: white;
+    }
+    .reader-toolbar .logo {
+      height: 30px;
+      margin-left: 1rem;
     }
     .book-pages {
       background-color: #ffffff;
@@ -71,13 +80,18 @@
     <!-- Toolbar -->
     <div class="reader-toolbar">
       <div class="left-controls">
-        <i class="bi bi-arrow-left-short" title="Kembali ke Daftar Buku"></i>
-        <span class="fw-bold">LEAP</span>
+        <a href="index.html" class="text-white text-decoration-none"><i class="bi bi-arrow-left-short" title="Kembali ke Dashboard"></i></a>
+        <img src="assets/logo-leap.png" alt="LEAP Logo" class="logo">
       </div>
       <div class="right-controls">
-        <i class="bi bi-bookmark" title="Bookmark"></i>
+        <i class="bi bi-house" title="Beranda"></i>
+        <i class="bi bi-arrow-left" title="Sebelumnya"></i>
+        <i class="bi bi-arrow-right" title="Berikutnya"></i>
+        <i class="bi bi-zoom-in" title="Perbesar"></i>
+        <i class="bi bi-zoom-out" title="Perkecil"></i>
+        <i class="bi bi-list-ul" title="Daftar Isi"></i>
+        <i class="bi bi-arrows-fullscreen" title="Layar Penuh"></i>
         <i class="bi bi-volume-up" title="Audio"></i>
-        <i class="bi bi-brightness-high" title="Cahaya"></i>
         <i class="bi bi-gear" title="Pengaturan"></i>
       </div>
     </div>
