@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LEAP Baca Buku</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -40,13 +40,20 @@
       height: 30px;
       margin-left: 1rem;
     }
+    .book-pages-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+      transition: transform 0.3s ease;
+      transform-origin: top center;
+    }
     .book-pages {
       background-color: #ffffff;
-      margin: 2rem auto;
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       max-width: 900px;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       gap: 2rem;
@@ -87,8 +94,8 @@
         <i class="bi bi-house" title="Beranda"></i>
         <i class="bi bi-arrow-left" title="Sebelumnya"></i>
         <i class="bi bi-arrow-right" title="Berikutnya"></i>
-        <i class="bi bi-zoom-in" title="Perbesar"></i>
-        <i class="bi bi-zoom-out" title="Perkecil"></i>
+        <i class="bi bi-zoom-in" id="zoomInBtn" title="Perbesar"></i>
+        <i class="bi bi-zoom-out" id="zoomOutBtn" title="Perkecil"></i>
         <i class="bi bi-list-ul" title="Daftar Isi"></i>
         <i class="bi bi-arrows-fullscreen" title="Layar Penuh"></i>
         <i class="bi bi-volume-up" title="Audio"></i>
@@ -97,12 +104,14 @@
     </div>
 
     <!-- Buku -->
-    <div class="book-pages">
-      <div class="book-page">
-        <p>Ricky dan Fira senang dengan rambut mereka. Ricky suka rambutnya yang keriting.</p>
-      </div>
-      <div class="book-page">
-        <p>Bentuk rambut tidak penting, yang penting kita percaya diri dan gembira!</p>
+    <div class="book-pages-wrapper" id="zoomContainer">
+      <div class="book-pages">
+        <div class="book-page">
+          <p>Ricky dan Fira senang dengan rambut mereka. Ricky suka rambutnya yang keriting.</p>
+        </div>
+        <div class="book-page">
+          <p>Bentuk rambut tidak penting, yang penting kita percaya diri dan gembira!</p>
+        </div>
       </div>
     </div>
 
@@ -115,5 +124,26 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const zoomInBtn = document.getElementById('zoomInBtn');
+    const zoomOutBtn = document.getElementById('zoomOutBtn');
+    const zoomContainer = document.getElementById('zoomContainer');
+
+    let currentZoom = 1; // default scale
+
+    zoomInBtn.addEventListener('click', () => {
+      if (currentZoom < 2.0) {
+        currentZoom += 0.1;
+        zoomContainer.style.transform = `scale(${currentZoom})`;
+      }
+    });
+
+    zoomOutBtn.addEventListener('click', () => {
+      if (currentZoom > 0.5) {
+        currentZoom -= 0.1;
+        zoomContainer.style.transform = `scale(${currentZoom})`;
+      }
+    });
+  </script>
 </body>
 </html>
