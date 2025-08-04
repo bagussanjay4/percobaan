@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEAP Baca Buku</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #c9eeff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .reader-container {
+      background-color: #e3f2fd;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .reader-toolbar {
+      background-color: #0d47a1;
+      color: white;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .reader-toolbar .left-controls i,
+    .reader-toolbar .right-controls i {
+      font-size: 1.25rem;
+      margin-right: 1rem;
+      cursor: pointer;
+    }
+    .book-pages {
+      background-color: #ffffff;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .book-page {
+      flex: 1;
+      background-color: #fefefe;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+      text-align: justify;
+      font-size: 1.2rem;
+    }
+    .page-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .page-controls button {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="reader-container">
+    <!-- Toolbar -->
+    <div class="reader-toolbar">
+      <div class="left-controls">
+        <i class="bi bi-arrow-left-short" title="Kembali ke Daftar Buku"></i>
+        <span class="fw-bold">LEAP</span>
+      </div>
+      <div class="right-controls">
+        <i class="bi bi-bookmark" title="Bookmark"></i>
+        <i class="bi bi-volume-up" title="Audio"></i>
+        <i class="bi bi-brightness-high" title="Cahaya"></i>
+        <i class="bi bi-gear" title="Pengaturan"></i>
+      </div>
+    </div>
+
+    <!-- Buku -->
+    <div class="book-pages">
+      <div class="book-page">
+        <p>Ricky dan Fira senang dengan rambut mereka. Ricky suka rambutnya yang keriting.</p>
+      </div>
+      <div class="book-page">
+        <p>Bentuk rambut tidak penting, yang penting kita percaya diri dan gembira!</p>
+      </div>
+    </div>
+
+    <!-- Navigasi Halaman -->
+    <div class="page-controls">
+      <button class="btn btn-outline-primary"><i class="bi bi-arrow-left"></i></button>
+      <span class="badge bg-primary px-3 py-2">2</span>
+      <button class="btn btn-outline-primary"><i class="bi bi-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
