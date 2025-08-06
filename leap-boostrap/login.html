@@ -6,56 +6,113 @@
   <title>Login | LEAP</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
   <style>
     body {
-      background-color: #c9eeff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin: 0;
+      padding: 0;
+      background: url('bg/bg-login.jpg') no-repeat center center/cover;
       min-height: 100vh;
       font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(2px);
     }
 
     .login-box {
-      background: white;
+      background: rgba(255, 255, 255, 0.1);
       padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
+      border-radius: 20px;
       width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .logo-maskot {
-      width: 60px;
+      width: 65px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+
+    .form-label {
+      color: #fff;
+    }
+
+    .form-control {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .form-control:focus {
+      transform: scale(1.02);
+      box-shadow: 0 0 10px rgba(25, 118, 210, 0.5);
+      border-color: #1976d2;
+    }
+
+    .input-group-text {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: none;
     }
 
     .btn-leap {
       background-color: #1976d2;
       color: white;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(25, 118, 210, 0.4);
+      transition: all 0.3s ease;
     }
 
     .btn-leap:hover {
       background-color: #125ca8;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(18, 92, 168, 0.5);
     }
 
-    .form-control:focus {
-      border-color: #1976d2;
-      box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
+    .login-box h2,
+    .login-box p,
+    .login-box a {
+      color: #fff;
+    }
+
+    @media (max-width: 576px) {
+      .login-box {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <div class="login-box text-center">
-    <img src="assets/maskot.png" alt="Maskot LEAP" class="logo-maskot mb-2">
-    <h2 class="fw-bold text-primary mb-4">LEAP</h2>
+    <img src="MaskotLeap/LIPPY-05.png" alt="Maskot LEAP" class="logo-maskot mb-3">
+    <h2 class="fw-bold mb-3">LEAP</h2>
 
     <form>
       <div class="mb-3 text-start">
         <label for="email" class="form-label">Email</label>
         <div class="input-group">
           <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-          <input type="email" id="email" class="form-control" placeholder="nama@sekolah.com" required>
+          <input type="email" id="email" class="form-control" placeholder="contoh@gmail.com" required>
         </div>
       </div>
 
@@ -67,12 +124,16 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-leap w-100 mt-3">Log In</button>
+      <button type="submit" class="btn btn-leap w-100 mt-3" id="logintBtn">Log In</button>
     </form>
-
-    <p class="mt-4 text-muted small">Cara login? <a href="#" class="text-decoration-none text-primary">Klik di sini</a></p>
   </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+     logintBtn.addEventListener('click', () => {
+      sessionStorage.clear();
+      localStorage.clear();
+      window.location.href = 'login.html';
+    });
+  </script>
 </body>
 </html>
