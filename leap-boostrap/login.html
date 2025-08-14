@@ -1,78 +1,99 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login | LEAP</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Login - Baca Leap</title>
   <style>
-    body {
-      background-color: #c9eeff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    .login-box {
-      background: white;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 100%;
-    }
-
-    .logo-maskot {
-      width: 60px;
-    }
-
-    .btn-leap {
-      background-color: #1976d2;
-      color: white;
-    }
-
-    .btn-leap:hover {
-      background-color: #125ca8;
-    }
-
-    .form-control:focus {
-      border-color: #1976d2;
-      box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
-    }
+    body{font-family:system-ui,Arial,sans-serif;background:linear-gradient(135deg,#A7D8F0,#fff);
+      display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+    .card{background:#fff;width:360px;padding:24px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.08);text-align:center}
+    .logo{font-weight:800;color:#0C6ABF;font-size:24px;margin-bottom:8px}
+    .muted{font-size:14px;color:#5b6b7b;margin-bottom:16px}
+    input,button{width:100%;padding:12px;border-radius:10px;font-size:16px}
+    input{border:1px solid #cfd8e3;margin:6px 0}
+    button{border:0;background:#0C6ABF;color:#fff;margin-top:10px;cursor:pointer}
+    button:hover{background:#09569c}
+    .helper{font-size:12px;color:#6b7280;margin-top:8px}
+    .notif{margin-top:12px;font-weight:700}
+    .success{color:#16a34a}.error{color:#dc2626}
   </style>
 </head>
 <body>
+  <div class="card">
+    <div class="logo">Leap</div>
+    <div class="muted">Masuk untuk mulai membaca</div>
 
-  <div class="login-box text-center">
-    <img src="assets/maskot.png" alt="Maskot LEAP" class="logo-maskot mb-2">
-    <h2 class="fw-bold text-primary mb-4">LEAP</h2>
-
-    <form>
-      <div class="mb-3 text-start">
-        <label for="email" class="form-label">Email</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-          <input type="email" id="email" class="form-control" placeholder="nama@sekolah.com" required>
-        </div>
-      </div>
-
-      <div class="mb-3 text-start">
-        <label for="password" class="form-label">Password</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-lock"></i></span>
-          <input type="password" id="password" class="form-control" placeholder="********" required>
-        </div>
-      </div>
-
-      <button type="submit" class="btn btn-leap w-100 mt-3">Log In</button>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <div class="helper">Gunakan email & password yang terdaftar.</div>
     </form>
 
-    <p class="mt-4 text-muted small">Cara login? <a href="#" class="text-decoration-none text-primary">Klik di sini</a></p>
+    <div id="notif" class="notif"></div>
   </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function getOrCreateDeviceId(){
+      const KEY='leap_device_id';
+      let id = localStorage.getItem(KEY);
+      if(!id){ id = crypto.randomUUID(); localStorage.setItem(KEY,id); }
+      return id;
+    }
+    async function buildFingerprint(){
+      const nav=navigator, scr=screen;
+      const data={
+        ua: nav.userAgent,
+        lang: nav.language,
+        tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        scr: `${Math.round(scr.width/8)*8}x${Math.round(scr.height/8)*8}`,
+        dpr: Math.round((window.devicePixelRatio||1)*10)/10,
+      };
+      const enc=new TextEncoder().encode(JSON.stringify(data));
+      const dig=await crypto.subtle.digest('SHA-256', enc);
+      return Array.from(new Uint8Array(dig)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+
+    const form = document.getElementById('loginForm');
+    const notif = document.getElementById('notif');
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      notif.textContent=''; notif.className='notif';
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const deviceId = getOrCreateDeviceId();
+      const fingerprint = await buildFingerprint();
+
+      try{
+        const res = await fetch('/auth/login', {
+          method:'POST',
+          headers:{'Content-Type':'application/json','X-Device-Id':deviceId},
+          credentials:'include', // agar cookie refresh terset
+          body: JSON.stringify({ email, password, deviceId, fingerprint })
+        });
+
+        const data = await res.json();
+        if(res.ok){
+          notif.textContent = 'Kamu berhasil masuk';
+          notif.classList.add('success');
+          // Simpan access token di memori (bukan localStorage)
+          sessionStorage.setItem('leap_access', data.accessToken);
+          setTimeout(()=>location.href='/dashboard.html', 800);
+        } else if (data.code === 'DEVICE_MISMATCH') {
+          notif.textContent = 'Akun ini terikat ke perangkat lain. Ajukan pindah perangkat dari Profil atau via OTP.';
+          notif.classList.add('error');
+        } else {
+          notif.textContent = data.message || 'Email atau password salah';
+          notif.classList.add('error');
+        }
+      }catch(err){
+        notif.textContent = 'Terjadi gangguan jaringan';
+        notif.classList.add('error');
+      }
+    });
+  </script>
 </body>
 </html>
